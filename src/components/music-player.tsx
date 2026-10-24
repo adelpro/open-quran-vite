@@ -113,13 +113,19 @@ export default function MusicPlayer({ playlist }: MusicPlayerProps) {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-3">
       <div className="flex h-20 w-full max-w-md flex-col items-center justify-center rounded-t-md border border-slate-200 p-0 shadow-md transition-transform hover:scale-105">
-        <audio
-          ref={audioRef}
-          onTimeUpdate={handleTimeUpdate}
-          onDurationChange={handleTimeUpdate}
-          onEnded={handleNextTrack}
-          src={playlist[currentTrack]?.link}
-        />
+        {playlist[currentTrack]?.link ? (
+          <audio
+            ref={audioRef}
+            onTimeUpdate={handleTimeUpdate}
+            onDurationChange={handleTimeUpdate}
+            onEnded={handleNextTrack}
+            src={playlist[currentTrack]?.link}
+          />
+        ) : (
+          <div className="flex h-10 items-center justify-center text-sm text-gray-500">
+            جاري تحميل السورة...
+          </div>
+        )}
         <div className="flex items-center justify-between gap-2 pt-5 md:gap-10">
           <button
             onClick={handlePreviousTrack}
